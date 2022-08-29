@@ -1,0 +1,32 @@
+plugins {
+	id 'org.springframework.boot' version '2.7.3'
+	id 'java'
+}
+
+apply plugin: 'io.spring.dependency-management'
+
+group = 'com.linkedinlearning'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+repositories {
+	mavenCentral()
+}
+
+project.ext.local=true
+
+dependencies {
+
+	if(project.hasProperty('local')) {
+		dependencies {
+			testImplementation 'de.flapdoodle.embed:de.flapdoodle.embed.mongo'
+		}
+	}
+
+	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb-reactive'
+	implementation 'org.springframework.boot:spring-boot-starter-webflux'
+	testImplementation 'org.junit.jupiter:junit-jupiter-api'
+	testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'io.projectreactor:reactor-test'
+}
